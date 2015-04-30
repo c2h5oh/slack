@@ -294,7 +294,17 @@ func callEvent(eventType string, ch chan SlackEvent, event json.RawMessage) {
 		log.Printf("XXX: Not implemented yet: %s -> %v", eventType, event)
 	}
 	if err := json.Unmarshal(event, &msg); err != nil {
-		log.Fatal(err)
+		origErr := err
+		msgBytes, err := event.MarshalJSON()
+		if err != nil {
+			log.Printf("unmarshalable %s w/ bad json: %s/%s", eventType, err, origErr)
+		} else {
+			log.Printf("unmarshalable %s: %s", eventType, string(msgBytes))
+		}
+		// no need to kill the process with a
+		// log.Fatal or panic if we get a reply_to of
+		// a string Timestamp rather than an int.
+		return
 	}
 	ch <- SlackEvent{Data: msg}
 }
