@@ -195,9 +195,7 @@ func (api *SlackWS) handleEvent(ch chan SlackEvent, event json.RawMessage) {
 		}
 
 		if ack.Ok {
-			// TODO: Send the ack back (is this useful?)
-			//ch <- SlackEvent{Type: EventAck, Data: ack}
-			log.Printf("Received an ok for: %d", ack.ReplyTo)
+			ch <- SlackEvent{Data: ack}
 			return
 		}
 
