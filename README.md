@@ -49,7 +49,7 @@
 
 ## Minimal RTM usage:
 
-
+See https://github.com/abourget/slack/blob/master/examples/websocket/websocket.go
 
 
 ## Contributing
