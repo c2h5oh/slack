@@ -11,7 +11,7 @@
     import (
 		"fmt"
 
-		"github.com/nlopes/slack"
+		"github.com/abourget/slack"
 	)
 
     func main() {
@@ -34,7 +34,7 @@
     import (
 	    "fmt"
 
-	    "github.com/nlopes/slack"
+	    "github.com/abourget/slack"
     )
 
     func main() {
