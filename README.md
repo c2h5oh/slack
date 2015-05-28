@@ -1,12 +1,8 @@
-# Slack API in Go
-
-[![GoDoc](https://godoc.org/github.com/nlopes/slack?status.png)](https://godoc.org/github.com/nlopes/slack)
-
 ## Installing
 
 ### *go get*
 
-    $ go get github.com/nlopes/slack
+    $ go get github.com/abourget/slack
 
 ## Example
 
@@ -51,14 +47,16 @@
 	    fmt.Printf("Id: %s, Fullname: %s, Email: %s\n", user.Id, user.Profile.RealName, user.Profile.Email)
     }
 
-## Why?
-I am currently learning Go and this seemed like a good idea.
+## Minimal RTM usage:
 
-## Stability
-As with any other piece of software expect bugs. Also, the design isn't finalized yet because I am not happy with how I laid out some things. Especially the websocket stuff. It is functional but very incomplete and buggy.
 
-## Help
-Anyone is welcome to contribute. Either open a PR or create an issue.
+
+
+## Contributing
+
+You are more than welcome to contribute to this project.  Fork and
+make a Pull Request, or create an Issue if you see any problem.
 
 ## License
+
 BSD 2 Clause license
