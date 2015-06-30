@@ -190,3 +190,13 @@ func (info Info) GetChannelById(channelId string) *Channel {
 	}
 	return nil
 }
+
+// GetGroupById returns a group given a group id
+func (info Info) GetGroupById(groupId string) *Group {
+	for _, group := range info.Groups {
+		if group.Id == groupId {
+			return &group
+		}
+	}
+	return nil
+}
