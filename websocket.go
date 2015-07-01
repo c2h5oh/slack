@@ -56,7 +56,7 @@ func (t JSONTimeString) String() string {
 	}
 	floatN, err := strconv.ParseFloat(string(t), 64)
 	if err != nil {
-		log.Panicln(err)
+		log.Println(err)
 		return ""
 	}
 	timeStr := int64(floatN)
@@ -130,7 +130,8 @@ func (api *SlackWS) Keepalive(interval time.Duration) {
 		select {
 		case <-ticker.C:
 			if err := api.Ping(); err != nil {
-				log.Fatal(err)
+				log.Println(err)
+				continue
 			}
 		}
 	}
@@ -159,12 +160,14 @@ func (api *SlackWS) HandleIncomingEvents(ch chan SlackEvent) {
 			if !api.conn.IsClientConn() {
 				api.conn, err = websocket.Dial(api.info.Url, api.config.protocol, api.config.origin)
 				if err != nil {
-					log.Panic(err)
+					log.Println(err)
+					return
 				}
 			}
 			// XXX: check for timeout and implement exponential backoff
 		} else if err != nil {
-			log.Panic(err)
+			log.Println(err)
+			return
 		}
 		if len(event) == 0 {
 			if api.debug {
@@ -184,14 +187,16 @@ func (api *SlackWS) handleEvent(ch chan SlackEvent, event json.RawMessage) {
 	em := Event{}
 	err := json.Unmarshal(event, &em)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return
 	}
 	switch em.Type {
 	case "":
 		// try ok
 		ack := AckMessage{}
 		if err = json.Unmarshal(event, &ack); err != nil {
-			log.Fatal(err)
+			log.Println(err)
+			return
 		}
 
 		if ack.Ok {
@@ -206,7 +211,8 @@ func (api *SlackWS) handleEvent(ch chan SlackEvent, event json.RawMessage) {
 	case "pong":
 		pong := Pong{}
 		if err = json.Unmarshal(event, &pong); err != nil {
-			log.Fatal(err)
+			log.Println(err)
+			return
 		}
 		api.mutex.Lock()
 		latency := time.Since(api.pings[pong.ReplyTo])
