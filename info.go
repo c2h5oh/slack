@@ -124,9 +124,10 @@ func (t JSONTime) String() string {
 
 // Team contains details about a team
 type Team struct {
-	Id     string `json:"id"`
-	Name   string `json:"name"`
-	Domain string `json:"name"`
+	Id          string `json:"id"`
+	Name        string `json:"name"`
+	Domain      string `json:"domain"`
+	EmailDomain string `json:"email_domain"`
 }
 
 // Icons XXX: needs further investigation
