@@ -25,7 +25,7 @@ func adminRequest(method string, teamName string, values url.Values, debug bool)
 	return adminResponse, nil
 }
 
-func (api *Slack) InviteGuest(
+func (api *Client) InviteGuest(
 	teamName string,
 	channelID string,
 	firstName string,
@@ -51,7 +51,7 @@ func (api *Slack) InviteGuest(
 	return nil
 }
 
-func (api *Slack) InviteRestricted(
+func (api *Client) InviteRestricted(
 	teamName string,
 	channelID string,
 	firstName string,

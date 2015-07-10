@@ -99,10 +99,10 @@ func post(path string, values url.Values, intf interface{}, debug bool) error {
 }
 
 func parseResponse(path string, values url.Values, intf interface{}, debug bool) error {
-	return postForm(SLACK_API+path, values, intf, debug)
+	return post(SLACK_API+path, values, intf, debug)
 }
 
 func parseAdminResponse(method string, teamName string, values url.Values, intf interface{}, debug bool) error {
 	endpoint := fmt.Sprintf(SLACK_WEB_API_FORMAT, teamName, method, time.Now().Unix())
-	return postForm(endpoint, values, intf, debug)
+	return post(endpoint, values, intf, debug)
 }
