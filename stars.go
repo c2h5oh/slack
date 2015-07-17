@@ -18,14 +18,9 @@ type StarsParameters struct {
 	Page  int
 }
 
-// TODO: Verify this. The whole thing is complicated. I don't like the way they mixed things
-// It also appears to be a bug in parsing the message
+// StarredItem is an item that has been starred.
 type StarredItem struct {
-	Type      string `json:"type"`
-	ChannelId string `json:"channel"`
-	Message   `json:"message,omitempty"`
-	File      `json:"file,omitempty"`
-	Comment   `json:"comment,omitempty"`
+	Item
 }
 
 type starsResponseFull struct {
@@ -52,8 +47,8 @@ func NewStarsParameters() StarsParameters {
 //             ...
 //        }
 //    }
+
 func (api *Client) GetStarred(params StarsParameters) ([]StarredItem, *Paging, error) {
-	response := &starsResponseFull{}
 	values := url.Values{
 		"token": {api.config.token},
 	}
@@ -66,6 +61,7 @@ func (api *Client) GetStarred(params StarsParameters) ([]StarredItem, *Paging, e
 	if params.Page != DEFAULT_STARS_PAGE {
 		values.Add("page", strconv.Itoa(params.Page))
 	}
+	response := &starsResponseFull{}
 	err := post("stars.list", values, response, api.debug)
 	if err != nil {
 		return nil, nil, err
