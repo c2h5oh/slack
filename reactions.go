@@ -129,7 +129,7 @@ func (res listReactionsResponseFull) extractReactedItems() []ReactedItem {
 }
 
 // AddReaction adds a reaction emoji to a message, file or file comment.
-func (api *Slack) AddReaction(name string, item ItemRef) error {
+func (api *Client) AddReaction(name string, item ItemRef) error {
 	values := url.Values{
 		"token": {api.config.token},
 	}
@@ -159,7 +159,7 @@ func (api *Slack) AddReaction(name string, item ItemRef) error {
 }
 
 // RemoveReaction removes a reaction emoji from a message, file or file comment.
-func (api *Slack) RemoveReaction(name string, item ItemRef) error {
+func (api *Client) RemoveReaction(name string, item ItemRef) error {
 	values := url.Values{
 		"token": {api.config.token},
 	}
@@ -189,7 +189,7 @@ func (api *Slack) RemoveReaction(name string, item ItemRef) error {
 }
 
 // GetReactions returns details about the reactions on an item.
-func (api *Slack) GetReactions(item ItemRef, params GetReactionsParameters) ([]ItemReaction, error) {
+func (api *Client) GetReactions(item ItemRef, params GetReactionsParameters) ([]ItemReaction, error) {
 	values := url.Values{
 		"token": {api.config.token},
 	}
@@ -219,7 +219,7 @@ func (api *Slack) GetReactions(item ItemRef, params GetReactionsParameters) ([]I
 }
 
 // ListReactions returns information about the items a user reacted to.
-func (api *Slack) ListReactions(params ListReactionsParameters) ([]ReactedItem, *Paging, error) {
+func (api *Client) ListReactions(params ListReactionsParameters) ([]ReactedItem, *Paging, error) {
 	values := url.Values{
 		"token": {api.config.token},
 	}
